@@ -1,5 +1,6 @@
 import {
   faFacebookSquare,
+  faGooglePlusSquare,
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,6 +11,7 @@ import Button from "../components/auth/Button";
 import FormBox from "../components/auth/FormBox";
 import Input from "../components/auth/Input";
 import Separator from "../components/auth/Separator";
+import SocialLogin from "../components/auth/SocialLogin";
 import { FatLink } from "../components/shared";
 import routes from "../routes";
 
@@ -17,6 +19,7 @@ const HeaderContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 15px;
 `;
 
 const Subtitle = styled(FatLink)`
@@ -25,22 +28,12 @@ const Subtitle = styled(FatLink)`
   margin-top: 10px;
 `;
 
-const FacebookLogin = styled.div`
-  margin-top: 10px;
+const FacebookLogin = styled(SocialLogin)`
   background-color: #385285;
-  width: 100%;
-  height: 100%;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 8px;
-  border-radius: 3px;
-  span {
-    margin-left: 10px;
-    font-weight: 600;
-    font-size: 12px;
-  }
+`;
+
+const GoogleLogin = styled(SocialLogin)`
+  background-color: #d7461f;
 `;
 
 function SignUp() {
@@ -57,6 +50,10 @@ function SignUp() {
           <FontAwesomeIcon icon={faFacebookSquare} />
           <span>Log in With Facebook</span>
         </FacebookLogin>
+        <GoogleLogin>
+          <FontAwesomeIcon icon={faGooglePlusSquare} />
+          <span>Log in With Google</span>
+        </GoogleLogin>
         <Separator />
         <form>
           <Input type="text" placeholder="Email" />
