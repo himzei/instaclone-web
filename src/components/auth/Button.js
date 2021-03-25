@@ -10,6 +10,7 @@ const Button = styled.input`
   font-weight: 500;
   width: 100%;
   border-radius: 3px;
+  opacity: ${(props) => (props.disabled ? "0.2" : "1")};
 `;
 
 export default Button;
