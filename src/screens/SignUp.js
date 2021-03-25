@@ -12,6 +12,7 @@ import FormBox from "../components/auth/FormBox";
 import Input from "../components/auth/Input";
 import Separator from "../components/auth/Separator";
 import SocialLogin from "../components/auth/SocialLogin";
+import PageTitle from "../components/PageTitle";
 import { FatLink } from "../components/shared";
 import routes from "../routes";
 
@@ -39,6 +40,7 @@ const GoogleLogin = styled(SocialLogin)`
 function SignUp() {
   return (
     <AuthLayout>
+      <PageTitle title="Signup" />
       <FormBox>
         <HeaderContainer>
           <FontAwesomeIcon icon={faInstagram} size="3x" />
