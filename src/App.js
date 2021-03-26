@@ -1,6 +1,6 @@
 import { ApolloProvider, useReactiveVar } from "@apollo/client";
 import {
-  HashRouter as Router,
+  BrowserRouter as Router,
   Route,
   Switch,
   Redirect,
