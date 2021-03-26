@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import gql from "graphql-tag";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
+import { logUserIn } from "../apollo";
 import AuthLayout from "../components/auth/AuthLayout";
 import BottomBox from "../components/auth/BottomBox";
 import Button from "../components/auth/Button";
@@ -45,6 +46,7 @@ function Login() {
     formState,
     getValues,
     setError,
+    clearErrors,
   } = useForm({
     mode: "onChange",
   });
@@ -56,6 +58,9 @@ function Login() {
       setError("result", {
         message: error,
       });
+    }
+    if (token) {
+      logUserIn(token);
     }
   };
   const [login, { loading }] = useMutation(LOGIN_MUTATION, {
@@ -70,6 +75,7 @@ function Login() {
       variables: { username, password },
     });
   };
+  const clearLoginError = () => clearErrors("result");
 
   return (
     <AuthLayout>
@@ -91,6 +97,7 @@ function Login() {
             type="text"
             placeholder="Username"
             hasError={Boolean(errors?.username?.message)}
+            onChange={clearLoginError}
           />
           <FormError message={errors?.username?.message} />
           <Input
@@ -101,6 +108,7 @@ function Login() {
             type="password"
             placeholder="Password"
             hasError={Boolean(errors?.password?.message)}
+            onChange={clearLoginError}
           />
           <FormError message={errors?.password?.message} />
           <Button
