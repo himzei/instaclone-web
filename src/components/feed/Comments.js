@@ -27,6 +27,19 @@ const CommentCount = styled.span`
   font-size: 10px;
 `;
 
+const WriteCommentContainer = styled.div`
+  border-top: 2px solid ${(props) => props.theme.bgColor};
+  margin-top: 10px;
+  padding: 10px 0;
+`;
+
+const WriteCommentInput = styled.input`
+  width: 100%;
+  &::placeholder {
+    font-size: 12px;
+  }
+`;
+
 function Comments({ photoId, author, caption, commentNumber, comments }) {
   const { data: userData } = useUser();
   const { register, handleSubmit, setValue, getValues } = useForm();
@@ -97,32 +110,34 @@ function Comments({ photoId, author, caption, commentNumber, comments }) {
     });
   };
   return (
-    <CommentsContainer>
-      <Comment author={author} payload={caption} />
-      <CommentCount>
-        {commentNumber === 1 ? "1 comment" : `${commentNumber} comments`}
-      </CommentCount>
-      {comments?.map((comment) => (
-        <Comment
-          key={comment.id}
-          id={comment.id}
-          photoId={photoId}
-          author={comment.user.username}
-          payload={comment.payload}
-          isMine={comment.isMine}
-        />
-      ))}
-      <div>
+    <>
+      <CommentsContainer>
+        <Comment author={author} payload={caption} />
+        <CommentCount>
+          {commentNumber === 1 ? "1 comment" : `${commentNumber} comments`}
+        </CommentCount>
+        {comments?.map((comment) => (
+          <Comment
+            key={comment.id}
+            id={comment.id}
+            photoId={photoId}
+            author={comment.user.username}
+            payload={comment.payload}
+            isMine={comment.isMine}
+          />
+        ))}
+      </CommentsContainer>
+      <WriteCommentContainer>
         <form onSubmit={handleSubmit(onValid)}>
-          <input
+          <WriteCommentInput
             name="payload"
             ref={register({ required: true })}
             type="text"
             placeholder="Write a comment..."
           />
         </form>
-      </div>
-    </CommentsContainer>
+      </WriteCommentContainer>
+    </>
   );
 }
 
