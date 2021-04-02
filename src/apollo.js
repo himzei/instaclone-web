@@ -34,7 +34,10 @@ export const logUserOut = (token) => {
 export const darkModeVar = makeVar(Boolean(localStorage.getItem(DARK_MODE)));
 
 const httpLink = createHttpLink({
-  uri: "http://localhost:4000/graphql",
+  uri:
+    process.env.NODE_ENV === "production"
+      ? "https://instaclone-backend-himzei.herokuapp.com/graphql"
+      : "http://localhost:4000/graphql",
 });
 
 const authLink = setContext((_, { headers }) => {
